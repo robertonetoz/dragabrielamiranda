@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+@theme {
+  --color-areia: #f4efe9;
+  --color-papel: #fbf8f4;
+  --color-linho: #e9dfd3;
+  --color-bronze: #b09175;
+  --color-cacau: #7a5c45;
+  --color-cafe: #33241c;
+  --color-noite: #281c16;
+
+  --font-display: var(--font-ysabeau), "Optima", "Candara", "Segoe UI", sans-serif;
+  --font-sans: var(--font-ysabeau-office), "Optima", "Candara", "Segoe UI", sans-serif;
+
+  --ease-suave: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 84rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: 3.5rem;
+  }
+}
+
+/* Títulos: Ysabeau leve, a mesma família de traço fino do logotipo. */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.012em;
+  font-variant-numeric: lining-nums;
+  text-wrap: balance;
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--color-areia);
+    color: var(--color-cafe);
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-variant-numeric: lining-nums;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-bronze);
+    color: var(--color-papel);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-cacau);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .sobre-escuro :focus-visible {
+    outline-color: var(--color-areia);
+  }
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3.25rem;
+    padding: 0.75rem 1.6rem;
+    border-radius: 999px;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    cursor: pointer;
+    transition:
+      background-color 0.35s var(--ease-suave),
+      border-color 0.35s var(--ease-suave),
+      color 0.35s var(--ease-suave);
+  }
+
+  .btn-escuro {
+    background: var(--color-cafe);
+    color: var(--color-areia);
+  }
+  .btn-escuro:hover {
+    background: var(--color-cacau);
+  }
+
+  .btn-contorno {
+    border: 1px solid color-mix(in srgb, var(--color-cafe) 28%, transparent);
+    color: var(--color-cafe);
+  }
+  .btn-contorno:hover {
+    border-color: var(--color-cafe);
+    background: var(--color-papel);
+  }
+
+  .btn-claro {
+    background: var(--color-areia);
+    color: var(--color-noite);
+  }
+  .btn-claro:hover {
+    background: var(--color-bronze);
+    color: var(--color-noite);
+  }
+
+  .btn-contorno-claro {
+    border: 1px solid color-mix(in srgb, var(--color-areia) 35%, transparent);
+    color: var(--color-areia);
+  }
+  .btn-contorno-claro:hover {
+    border-color: var(--color-areia);
+  }
+
+  /* Link de texto com sublinhado que se redesenha no hover. */
+  .link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+    transition: background-size 0.45s var(--ease-suave);
+  }
+  .link:hover {
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+  }
+
+  /*
+   * Régua: o traço de medida que separa as seções. Uma linha com
+   * marcações curtas a cada 9px e longas a cada 72px.
+   */
+  .regua {
+    --tinta: var(--color-bronze);
+    height: 14px;
+    border-top: 1px solid var(--tinta);
+    background-image:
+      repeating-linear-gradient(to right, var(--tinta) 0 1px, transparent 1px 72px),
+      repeating-linear-gradient(
+        to right,
+        color-mix(in srgb, var(--tinta) 60%, transparent) 0 1px,
+        transparent 1px 9px
+      );
+    background-size:
+      100% 100%,
+      100% 6px;
+    background-repeat: no-repeat;
+  }
+
+  .regua-vertical {
+    --tinta: var(--color-bronze);
+    width: 14px;
+    border-left: 1px solid var(--tinta);
+    background-image:
+      repeating-linear-gradient(to bottom, var(--tinta) 0 1px, transparent 1px 72px),
+      repeating-linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--tinta) 60%, transparent) 0 1px,
+        transparent 1px 9px
+      );
+    background-size:
+      100% 100%,
+      6px 100%;
+    background-repeat: no-repeat;
+  }
+
+  .sem-barra {
+    scrollbar-width: none;
+  }
+  .sem-barra::-webkit-scrollbar {
+    display: none;
+  }
+}
