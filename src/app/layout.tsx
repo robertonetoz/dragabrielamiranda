@@ -22,13 +22,18 @@ const title = "Dra. Gabriela Miranda | Emagrecimento e Performance em Uberlândi
 const description =
   "Médica em Uberlândia com foco em emagrecimento, obesidade, saúde metabólica e performance. Consulta presencial com bioimpedância na Concept Clinic e teleconsulta. CRM MG 73587.";
 
+/* Endereço público do site: é ele que monta o link da imagem de prévia ao compartilhar. */
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dragabrielamiranda.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(siteUrl),
   title,
   description,
+  alternates: { canonical: "/" },
   openGraph: {
     title,
     description,
+    url: "/",
     locale: "pt_BR",
     type: "website",
     siteName: site.name,
